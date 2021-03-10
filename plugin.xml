@@ -125,11 +125,13 @@ SOFTWARE.
       <feature name="OpenWithPlugin">
         <param name="android-package" value="com.missiveapp.openwith.OpenWithPlugin"/>
       </feature>
+      <preference name="AndroidLaunchMode" value="singleTask"/>
     </config-file>
 
     <!-- cordova plugin src files -->
     <source-file src="src/android/com/missiveapp/openwith/OpenWithPlugin.java" target-dir="src/com/missiveapp/openwith" />
     <source-file src="src/android/com/missiveapp/openwith/PluginResultSender.java" target-dir="src/com/missiveapp/openwith" />
     <source-file src="src/android/com/missiveapp/openwith/Serializer.java" target-dir="src/com/missiveapp/openwith" />
+    <source-file src="src/android/com/missiveapp/openwith/ByteStreams.java" target-dir="src/com/missiveapp/openwith" />
   </platform>
 </plugin>
