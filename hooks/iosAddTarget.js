@@ -66,6 +66,8 @@ module.exports = function(context) {
 
   findXCodeproject(context, function(projectFolder, projectName) {
     var preferences = getPreferences(context, projectName);
+    console.log('Preferences of ' + projectName);
+    console.log(preferences);
 
     var pbxProjectPath = path.join(projectFolder, 'project.pbxproj');
     var pbxProject = parsePbxProject(context, pbxProjectPath);

@@ -7,13 +7,24 @@ const BUNDLE_SUFFIX = '.shareextension';
 function getPreferences(context, projectName) {
   var configXml = getConfigXml(context);
   var plist = projectPlistJson(context, projectName);
+  var bundleIdentifier = null;
+
+  var cFBundleIdentifier = configXml.match(new RegExp('ios-CFBundleIdentifier="(.*?)"', "i"));
+
+  if (cFBundleIdentifier && cFBundleIdentifier[1]) {
+    bundleIdentifier = cFBundleIdentifier[1];
+  }
+
+  if (bundleIdentifier == null) {
+    bundleIdentifier = getCordovaParameter(configXml, 'IOS_BUNDLE_IDENTIFIER');
+  }
 
   return [{
     key: '__DISPLAY_NAME__',
     value: getCordovaParameter(configXml, 'DISPLAY_NAME') || projectName
   }, {
     key: '__BUNDLE_IDENTIFIER__',
-    value: getCordovaParameter(configXml, 'IOS_BUNDLE_IDENTIFIER') + BUNDLE_SUFFIX
+    value:  bundleIdentifier + BUNDLE_SUFFIX
   }, {
     key: '__BUNDLE_SHORT_VERSION_STRING__',
     value: plist.CFBundleShortVersionString
@@ -22,7 +33,7 @@ function getPreferences(context, projectName) {
     value: plist.CFBundleVersion
   }, {
     key: '__URL_SCHEME__',
-    value: getCordovaParameter(configXml, 'IOS_URL_SCHEME')
+    value: 'openwithshareextension' // getCordovaParameter(configXml, 'IOS_URL_SCHEME')
   }];
 }
 
